@@ -1,21 +1,34 @@
 import { useLocalization } from '../../shared/hooks/useLocalization';
-import React from 'react';
-import { View, Text, Image, TextInput, StyleSheet, Pressable } from 'react-native';
+import React, { useCallback } from 'react';
+import { View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
 import LoginImage from './assets/login-image.svg';
+import { LANGUAGES } from '../../shared/constants/languages';
 
 const LoginScreen = () => {
 
     const { t, currentLanguage, changeLanguage } = useLocalization();
 
-    const handleChangeLanguage = () => {
-        changeLanguage(currentLanguage === 'ru' ? 'en' : 'ru');
-    }
+    const handleChangeLanguage = useCallback((value) => {
+        changeLanguage(value);
+    }, [])
 
     return (
         <View style={styles.mainLayout}>
-            <Pressable style={styles.toggleLanguage}onPress={handleChangeLanguage}>
-                <Text style={styles.toggleLanguageText}>ru|en</Text>
-            </Pressable>
+            <View style={styles.languagesList}>
+                {Object.keys(LANGUAGES).map((item, index) => {
+                    return (
+                        <Pressable
+                            key={index}
+                            style={styles.toggleLanguage}
+                            onPress={() => handleChangeLanguage(item)}>
+                                <Text style={styles.toggleLanguageText}>
+                                   {LANGUAGES[item]}
+                                </Text>
+                        </Pressable>
+                    )
+                })}
+            </View>
+            
             <LoginImage style={styles.loginImage} />
             <Text style={styles.welcomeText}>{t('welcome back')}</Text>
 
@@ -46,10 +59,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#0A0171',
     },
-    toggleLanguage: {
+    languagesList: {
         position: 'absolute',
         top: 20,
         right: 20
+    },
+    toggleLanguage: {
+       padding: 5
     },
     toggleLanguageText: {
         color: '#fff',
