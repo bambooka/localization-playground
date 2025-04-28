@@ -18,20 +18,16 @@ export const useLocalization = () => {
     }, [])
 
     const changeLanguage = async (key?) => {
-        const lang = key || deviceLanguage;
+        
         const savedLanguage = await AsyncStorage.getItem('language');
+        const lang = key || savedLanguage || deviceLanguage;
        
-        if (savedLanguage) {
-            setCurrentLanguage(lang);
-        } else {
-            await AsyncStorage.setItem('language', lang);
-            setCurrentLanguage(deviceLanguage);
-        }
+        setCurrentLanguage(lang);
+        key && await AsyncStorage.setItem('language', lang);
         
     }
 
-    const t = (key) => {
-        console.log(translations[currentLanguage])
+    const t = (key: string): any => {
         return translations[currentLanguage][key];
     }
 

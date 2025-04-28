@@ -21,7 +21,7 @@ const LoginScreen = () => {
                             key={index}
                             style={styles.toggleLanguage}
                             onPress={() => handleChangeLanguage(item)}>
-                                <Text style={styles.toggleLanguageText}>
+                                <Text style={[styles.toggleLanguageText, item === currentLanguage && styles.selectedLanguageText]}>
                                    {LANGUAGES[item]}
                                 </Text>
                         </Pressable>
@@ -51,7 +51,7 @@ const LoginScreen = () => {
     )
 }
 
-export default LoginScreen;
+export default React.memo(LoginScreen);
 
 const styles = StyleSheet.create({
     mainLayout: {
@@ -70,6 +70,9 @@ const styles = StyleSheet.create({
     toggleLanguageText: {
         color: '#fff',
         fontSize: 20
+    },
+    selectedLanguageText: {
+        color: 'yellow'
     },
     sendForm: {
         alignContent: 'stretch',
