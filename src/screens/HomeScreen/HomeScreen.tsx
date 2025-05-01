@@ -1,12 +1,12 @@
-import { useLocalization } from '../../shared/hooks/useLocalization';
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
+import TodoList from '../../features/TodoList';
 
 const HomeScreen = () => {
-    const { t } = useLocalization();
+
     return (
         <View>
-            <Text>{t('welcome')}</Text>
+            <TodoList />
         </View>
     )
 }

@@ -1,4 +1,4 @@
-package com.localizationPlayground
+package com.apiapp
 
 import android.app.Application
 import com.facebook.react.PackageList

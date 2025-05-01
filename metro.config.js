@@ -17,5 +17,4 @@ config.transformer = {
     assetExts: config.resolver.assetExts.filter(ext => ext !== 'svg'),
     sourceExts: [...config.resolver.sourceExts, 'svg'],
   };
-
 module.exports = mergeConfig(getDefaultConfig(__dirname), config);
