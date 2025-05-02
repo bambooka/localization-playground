@@ -13,4 +13,7 @@ export class ToDoEndpoint {
     static editTodo = ({id, data}) => {
         return api.patch(`/todos/${id}`, data)
     }
+    static createTodo = (data) => {
+        return api.post('/todos', data);
+    }
 }

@@ -21,7 +21,14 @@ export const editTodo = createAsyncThunk(
     'todos/edit',
     async({id, data}: { id: number, data: { title: string }}, thunkAPI) => {
         const response = await ToDoEndpoint.editTodo({id, data});
-        // console.log(response.data)
         return { id: id, title: 'new 0'};
+    }
+)
+
+export const createTodo = createAsyncThunk(
+    'todos/create',
+    async(data, thunkAPI) => {
+        const response = await ToDoEndpoint.createTodo(data)
+        return response.data;
     }
 )

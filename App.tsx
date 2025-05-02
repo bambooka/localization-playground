@@ -5,6 +5,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider } from 'react-redux';
 import { store } from './src/app/store';
+import TodoScreen from './src/screens/TodoScreen';
 
 const App = () => {
   const Stack = createStackNavigator();
@@ -15,6 +16,7 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="TodoScreen" component={TodoScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

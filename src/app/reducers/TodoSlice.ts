@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteTodo, editTodo, getAllTodos } from "./TodosActionCreators";
+import { createTodo, deleteTodo, editTodo, getAllTodos } from "./TodosActionCreators";
 
 interface ITodo {
     id: number;
@@ -49,7 +49,6 @@ const TodoSlice = createSlice({
 
             })
             .addCase(editTodo.fulfilled, (state, action) => {
-                console.log(action)
                 const updatedIndex = state.todos.findIndex((todo) => todo.id === action.payload.id);
                 if (updatedIndex > -1) {
                     state.todos[updatedIndex] = { ...state.todos[updatedIndex], ...action.payload};
@@ -57,6 +56,15 @@ const TodoSlice = createSlice({
             })
             .addCase(editTodo.rejected, (state, action) => {
                 state.error = action.error;
+            })
+            .addCase(createTodo.pending, (state) => {
+
+            })
+            .addCase(createTodo.fulfilled, (state, action) => {
+                state.todos = [ ...state.todos, action.payload]
+            })
+            .addCase(createTodo.rejected, (state, action) => {
+                state.error = action.payload
             })
 
     }

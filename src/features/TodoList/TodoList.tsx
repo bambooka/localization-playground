@@ -1,17 +1,23 @@
 import React, { useEffect } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Pressable } from 'react-native';
 import { useAppSelector, useAppDispatch } from '../../shared/hooks/redux';
 import { getAllTodos } from '../../app/reducers/TodosActionCreators';
 import TodoItem from './components';
+import { useNavigation } from '@react-navigation/native';
+import PlusIcon from '../../shared/assets/svg/plus.svg'
 
 const TodoList = () => {
-
     const dispatch = useAppDispatch();
+    const navigation = useNavigation();
     const { isLoading, todos, error } = useAppSelector(state => state.todos)
 
     useEffect(() => {
         dispatch(getAllTodos())
     }, []);
+
+    const handleCreateTodo = () => {
+        navigation.navigate('TodoScreen')
+    }
 
     if (isLoading) {
         return <Text>loading..</Text>
@@ -20,18 +26,35 @@ const TodoList = () => {
     if (error) return <Text>smth went wrong</Text>
 
     return (
-        <ScrollView style={styles.todoListWrapper}>
-            {todos.map((item) => (
-                <TodoItem key={item.id} data={item} />
-            ))}
-        </ScrollView>
+        <View>
+            <ScrollView style={styles.todoList}>
+                {todos.map((item) => (
+                    <TodoItem key={item.id} data={item} />
+                ))}
+            </ScrollView>
+            <Pressable
+                style={styles.createButton}
+                onPress={handleCreateTodo}
+            >
+                <PlusIcon fill='#fff' />
+            </Pressable>
+        </View>
+        
     )
 }
 
 export default TodoList;
 
 const styles = StyleSheet.create({
-    todoListWrapper: {
+    todoList: {
         paddingHorizontal: 20
+    },
+    createButton: {
+        position: 'absolute',
+        backgroundColor: 'blue',
+        bottom: '5%',
+        right: '10%',
+        padding: 15,
+        borderRadius: 100
     }
 })

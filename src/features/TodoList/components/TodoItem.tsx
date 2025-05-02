@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { FC } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { useAppDispatch } from '../../../shared/hooks/redux';
-import { deleteTodo, editTodo } from '../../../app/reducers/TodosActionCreators';
+import { deleteTodo } from '../../../app/reducers/TodosActionCreators';
 
 const TodoItem: FC = ({data}) => {
 
@@ -16,8 +16,8 @@ const TodoItem: FC = ({data}) => {
 
     const handleEditTodo = () => {
         console.log('edit');
-        const updated = { title: 'new'}
-        dispatch(editTodo({id: data.id, data: updated}))
+        navigate('TodoScreen', { data, isEdit: true })
+       
     };
 
     return(
