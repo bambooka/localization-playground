@@ -1,8 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { FC } from 'react';
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useAppDispatch } from '../../../shared/hooks/redux';
 import { deleteTodo } from '../../../app/reducers/TodosActionCreators';
+import Button from '../../../shared/components/Button';
+import EditIcon from '../../../shared/assets/svg/edit.svg';
+import DeleteIcon from '../../../shared/assets/svg/delete.svg';
 
 const TodoItem: FC = ({data}) => {
 
@@ -10,30 +13,36 @@ const TodoItem: FC = ({data}) => {
     const {navigate} = useNavigation();
 
     const handleDeleteTodo = () => {
-        console.log('delete')
         dispatch(deleteTodo(data.id))
     };
 
     const handleEditTodo = () => {
-        console.log('edit');
         navigate('TodoScreen', { data, isEdit: true })
-       
     };
 
     return(
         <View style={styles.todoItem}>
-            <Text numberOfLines={1} ellipsizeMode='tail' style={styles.todoItemText}>{data.title}</Text>
-            <Pressable onPress={handleDeleteTodo} style={[styles.button,styles.deleteButton]}>
-                <Text>X</Text>
-            </Pressable>
-            <Pressable onPress={handleEditTodo} style={[styles.button,styles.editButton]}>
-                <Text>P</Text>
-            </Pressable>
+            <Text
+                numberOfLines={1}
+                ellipsizeMode='tail'
+                style={styles.todoItemText}>
+                    {data.title}
+            </Text>
+            <Button
+                handlePress={handleDeleteTodo}
+                styles={{button: {...styles.button, ...styles.deleteButton}}}>
+                    <DeleteIcon fill="#fff" width='24' height='24' />
+                </Button>
+            <Button
+                handlePress={handleEditTodo}
+                styles={{button: { ...styles.button, ...styles.editButton}}}>
+                    <EditIcon fill="#fff" width='24' height='24' />
+                </Button>
         </View>
     )
 }
 
-export default TodoItem;
+export default React.memo(TodoItem);
 
 const styles = StyleSheet.create({
     todoItem: {
@@ -52,18 +61,18 @@ const styles = StyleSheet.create({
     todoItemText: {
         color: '#123885',
         flexGrow: 1,
-        maxWidth: '85%',
+        maxWidth: '70%',
     },
     button: {
-        paddingHorizontal: 5,
+        paddingHorizontal: 8,
         marginHorizontal: 5,
         borderRadius: 10,
 
     },
     deleteButton: {
-        backgroundColor: 'red'
+        backgroundColor: '#ff1100'
     },
     editButton: {
-        backgroundColor: 'yellow'
+        backgroundColor: '#09ddaa'
     }
 })

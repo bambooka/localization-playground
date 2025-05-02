@@ -1,8 +1,9 @@
 import { createTodo, editTodo } from '../../app/reducers/TodosActionCreators';
 import React, { useLayoutEffect, useRef, useState } from 'react';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { useAppDispatch } from '../../shared/hooks/redux';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import Button from '../../shared/components/Button';
 
 const TodoScreen = () => {
     const dispatch = useAppDispatch();
@@ -54,12 +55,17 @@ const TodoScreen = () => {
                 onChangeText={handleChange}    
             />
             <View style={styles.todoActionContainer}>
-                <Pressable style={[styles.button, styles.cancelButton]} onPress={goBack}>
-                    <Text style={[styles.buttonText]}>cancel</Text>
-                </Pressable>
-                <Pressable style={[styles.button, styles.saveButton]} onPress={handleSubmit}>
-                    <Text style={[styles.buttonText]}>save</Text>
-                </Pressable>
+                <Button
+                    handlePress={goBack}
+                    styles={{button: { ...styles.button, ...styles.cancelButton}}}>
+                        <Text style={styles.buttonText}>cancel</Text>
+                </Button>
+                <Button
+                    handlePress={handleSubmit}
+                    styles={{button: { ...styles.button, ...styles.saveButton}}}>
+                        <Text style={styles.buttonText}>save</Text>
+                    </Button>
+                
             </View>
             
         </View>
