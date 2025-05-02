@@ -1,13 +1,14 @@
 {
   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": "./",
     "paths": {
-      "@app": ["./src/app/*"],
-      "@features": ["./src/features/*"],
-      "@shared": ["./src/shared/*"],
-      "@widgets": ["./src/widgets/*"],
-      "@pages": ["./src/pages/*"]
+      "@app": ["src/app/*"],
+      "@features": ["src/features/*"],
+      "@shared": ["src/shared/*"],
+      "@widgets": ["src/widgets/*"],
+      "@screens": ["src/screens/*"],
+      "@entities": ["src/entities/*"],
     }
   }
 }

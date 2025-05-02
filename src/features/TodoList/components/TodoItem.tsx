@@ -1,9 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { FC } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { useAppDispatch } from '../../../shared/hooks/redux';
+import { useAppDispatch } from '@shared/hooks/redux';
 import { deleteTodo } from '../../../app/reducers/TodosActionCreators';
-import Button from '../../../shared/components/Button';
+import Button from '@shared/components/Button';
 import EditIcon from '../../../shared/assets/svg/edit.svg';
 import DeleteIcon from '../../../shared/assets/svg/delete.svg';
 

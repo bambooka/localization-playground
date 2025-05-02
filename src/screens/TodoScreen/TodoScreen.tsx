@@ -61,10 +61,11 @@ const TodoScreen = () => {
                         <Text style={styles.buttonText}>cancel</Text>
                 </Button>
                 <Button
+                    disabled={inputValue.length === 0}
                     handlePress={handleSubmit}
                     styles={{button: { ...styles.button, ...styles.saveButton}}}>
                         <Text style={styles.buttonText}>save</Text>
-                    </Button>
+                </Button>
                 
             </View>
             

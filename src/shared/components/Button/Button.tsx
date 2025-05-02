@@ -1,13 +1,28 @@
 import { memo } from 'react'
-import { Pressable } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 
-const Button = ({handlePress, styles, children}) => {
-    console.log(styles)
+const Button = ({
+    disabled = false,
+    handlePress,
+    styles,
+    children
+}) => {
+
+    
     return(
-        <Pressable style={styles.button} onPress={handlePress}>
+        <Pressable
+            disabled={disabled}
+            style={[styles.button, disabled && baseStyle.disableButton]}
+            onPress={handlePress}>
             {children}
         </Pressable>
     )
 }
 
 export default memo(Button);
+
+const baseStyle = StyleSheet.create({
+    disableButton: {
+        opacity: 0.7
+    },
+})
