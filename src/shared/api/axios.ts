@@ -10,7 +10,6 @@ const api = axios.create({
 api.interceptors.request.use(async (config) => {
     const token = '123';
     config.headers.Authorization = token
-    // console.log(config)
     
     return config
 })

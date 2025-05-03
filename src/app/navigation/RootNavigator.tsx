@@ -7,7 +7,7 @@ const RootNavigator = () => {
     return (
         <Tab.Navigator screenOptions={{headerShown: false}}>
             <Tab.Screen name="news" component={NewsfeedStack} />
-            <Tab.Screen name="Todo" component={TodoStack} />
+            <Tab.Screen name="todo" component={TodoStack} />
         </Tab.Navigator>
     )
 }

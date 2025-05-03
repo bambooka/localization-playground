@@ -1,12 +1,13 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { Text } from "react-native";
+import CommentsScreen from "@screens/CommentsScreen";
+import PostsScreen from "@screens/PostsScreen";
 
 const NewsfeedStack = () => {
     const Stack = createStackNavigator();
     return (
       <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name="Main" component={() => <Text>123</Text>} />
-          <Stack.Screen name="New" component={() => <Text>456</Text>} />
+          <Stack.Screen name="Posts" component={PostsScreen} />
+          <Stack.Screen name="Comments" component={CommentsScreen} />
       </Stack.Navigator>
     )
   }

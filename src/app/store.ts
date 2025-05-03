@@ -1,10 +1,14 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import user from './reducers/UserSlice';
 import todos from './reducers/TodoSlice';
+import posts from '../entities/Post/model/PostsSlice';
+import comments from '../entities/Comment/model/CommentSlice';
 
 const rootReducer = combineReducers({
     user,
-    todos
+    todos,
+    posts,
+    comments
 });
 
 export const store = () => {
