@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { View, Text, ScrollView, StyleSheet, Pressable } from 'react-native';
 import { useAppSelector, useAppDispatch } from '../../../shared/hooks/redux';
-import { getAllTodos } from '@entities/Todo/model/TodosActionCreators.ts';
-import TodoItem from './TodoItem';
+import { getAllTodos } from '@entities/Todo/model/TodosActionCreators';
+import TodoItem from '@entities/Todo/ui/TodoItem';
 import { useNavigation } from '@react-navigation/native';
 import PlusIcon from '@shared/assets/svg/plus.svg'
 

@@ -1,20 +1,19 @@
 module.exports = {
-  presets: [
-    'module:metro-react-native-babel-preset',
-  ],
+  presets: ['module:metro-react-native-babel-preset'],
   plugins: [
-    ['module-resolver', {
-      root: ['./src'],
-      extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
-      alias: {
-        "@shared": "./src/shared",
-        "@app": "./src/app",
-        "@screens": "./src/screens",
-        "@entities": "./src/entities",
-        "@features": "./src/features",
-        "@widgets": "./src/widgets"
-      }
-    }]
+    [
+      'module-resolver',
+      {
+        root: ['./src'],
+        alias: {
+          '@app': './src/app',
+          '@entities': './src/entities',
+          '@features': './src/features',
+          '@pages': './src/pages',
+          '@shared': './src/shared',
+          '@widgets': './src/widgets',
+        },
+      },
+    ],
   ],
-  presets: ['module:@react-native/babel-preset'],
 };

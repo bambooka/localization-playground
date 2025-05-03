@@ -1,0 +1,12 @@
+{
+    "path-intellisense.mappings": {
+      "@app": "${workspaceRoot}/src/app",
+      "@entities": "${workspaceRoot}/src/entities",
+      "@features": "${workspaceRoot}/src/features",
+      "@pages": "${workspaceRoot}/src/pages",
+      "@shared": "${workspaceRoot}/src/shared",
+      "@widgets": "${workspaceRoot}/src/widgets"
+    },
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.suggest.autoImports": true
+  }
