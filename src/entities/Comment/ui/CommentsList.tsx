@@ -23,6 +23,7 @@ const CommentsList = () => {
 
     return (
         <ScrollView>
+            <Text>{`comments for post ${route?.params?.postId}`}</Text>
             {comments.map((comment, index) => (
                 <CommentItem key={`comment-${index}`} data={comment} />
             ))}

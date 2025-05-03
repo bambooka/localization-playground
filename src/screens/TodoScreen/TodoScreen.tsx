@@ -1,74 +1,12 @@
-import { createTodo, editTodo } from '../../app/reducers/TodosActionCreators';
-import React, { useLayoutEffect, useRef, useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { useAppDispatch } from '../../shared/hooks/redux';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import Button from '../../shared/components/Button';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import AddTodoForm from '@features/add-todo/ui/AddTodoForm';
 
 const TodoScreen = () => {
-    const dispatch = useAppDispatch();
-    const route = useRoute();
-    const { goBack } = useNavigation()
-    const inputTitleRef = useRef<TextInput>();
-    const data = route.params;
-    const isEdit = data?.isEdit;
-
-    const [inputValue, setInputValue] = useState('')
-
-    const initForm = () => {
-        if (isEdit) {
-            setInputValue(route.params.data.title);
-            inputTitleRef.current?.focus();
-        } 
-    }
-
-    const handleSubmit = async () => {
-        isEdit ? update() : create();
-        goBack()
-    }
-
-    const update = () => {
-        const updated = { title: inputValue}
-        dispatch(editTodo({id: data.id, data: updated}))
-    }
-
-    const create = () => {
-        dispatch(createTodo({title: inputValue, userId: 1}))
-    }
-
-    useLayoutEffect(() => {
-        initForm()
-    }, [])
-
-    const handleChange = (text) => {
-        setInputValue(text);
-    }
 
     return (
         <View style={styles.todoForm}>
-            <Text style={styles.title}>{isEdit ? 'Edit todo' : 'Create new todo'}</Text>
-            <TextInput
-                style={styles.textInput}
-                ref={inputTitleRef}
-                value={inputValue}
-                placeholder='input your todos title'
-                onChangeText={handleChange}    
-            />
-            <View style={styles.todoActionContainer}>
-                <Button
-                    handlePress={goBack}
-                    styles={{button: { ...styles.button, ...styles.cancelButton}}}>
-                        <Text style={styles.buttonText}>cancel</Text>
-                </Button>
-                <Button
-                    disabled={inputValue.length === 0}
-                    handlePress={handleSubmit}
-                    styles={{button: { ...styles.button, ...styles.saveButton}}}>
-                        <Text style={styles.buttonText}>save</Text>
-                </Button>
-                
-            </View>
-            
+            <AddTodoForm />
         </View>
     )
 }

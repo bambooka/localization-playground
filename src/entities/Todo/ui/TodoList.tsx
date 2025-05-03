@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { View, Text, ScrollView, StyleSheet, Pressable } from 'react-native';
-import { useAppSelector, useAppDispatch } from '../../shared/hooks/redux';
-import { getAllTodos } from '../../app/reducers/TodosActionCreators';
-import TodoItem from './components';
+import { useAppSelector, useAppDispatch } from '../../../shared/hooks/redux';
+import { getAllTodos } from '@entities/Todo/model/TodosActionCreators.ts';
+import TodoItem from './TodoItem';
 import { useNavigation } from '@react-navigation/native';
-import PlusIcon from '../../shared/assets/svg/plus.svg'
+import PlusIcon from '@shared/assets/svg/plus.svg'
 
 const TodoList = () => {
     const dispatch = useAppDispatch();

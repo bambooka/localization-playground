@@ -4,7 +4,8 @@ import { View, Text, StyleSheet } from "react-native"
 const CommentItem = ({data}) => {
     return (
         <View style={styles.commentContainer}>
-            <Text style={styles.commentText}> {data.postId} {data.name}</Text>
+            <Text style={styles.commentName}>{data.name}</Text>
+            <Text style={styles.commentBody}>{data.body}</Text>
         </View>
     )
 }
@@ -18,7 +19,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 15
     },
-    commentText: {
+    commentName: {
         color: 'red'
+    },
+    commentBody: {
+        color: 'green'
     }
 })

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ToDoEndpoint } from "../../shared/api/endpoints/todos";
+import { ToDoEndpoint } from "@shared/api/endpoints/todos";
 
 export const getAllTodos = createAsyncThunk(
     'todos/getAll',

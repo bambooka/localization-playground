@@ -61,6 +61,7 @@ const TodoSlice = createSlice({
 
             })
             .addCase(createTodo.fulfilled, (state, action) => {
+                console.log(action.payload)
                 state.todos = [ ...state.todos, action.payload]
             })
             .addCase(createTodo.rejected, (state, action) => {
