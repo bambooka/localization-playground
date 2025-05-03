@@ -1,15 +1,18 @@
 import { useEffect } from 'react';
 import { View, Text, ScrollView, StyleSheet, Pressable } from 'react-native';
-import { useAppSelector, useAppDispatch } from '../../../shared/hooks/redux';
+import { useAppDispatch } from '../../../shared/hooks/redux';
 import { getAllTodos } from '@entities/Todo/model/TodosActionCreators';
 import TodoItem from '@entities/Todo/ui/TodoItem';
 import { useNavigation } from '@react-navigation/native';
 import PlusIcon from '@shared/assets/svg/plus.svg'
+import { useGetTodosQuery } from '../../../features/add-todo/api/todoApi';
 
 const TodoList = () => {
     const dispatch = useAppDispatch();
     const navigation = useNavigation();
-    const { isLoading, todos, error } = useAppSelector(state => state.todos)
+
+    const {isLoading, data, error} = useGetTodosQuery()
+
 
     useEffect(() => {
         dispatch(getAllTodos())
@@ -28,7 +31,7 @@ const TodoList = () => {
     return (
         <View>
             <ScrollView style={styles.todoList}>
-                {todos.map((item) => (
+                {data.map((item) => (
                     <TodoItem key={item.id} data={item} />
                 ))}
             </ScrollView>

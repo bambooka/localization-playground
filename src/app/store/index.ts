@@ -1,13 +1,14 @@
-import { rootReducer } from "@app/store/rootReducer";
 import { configureStore } from "@reduxjs/toolkit";
+import { todoApi } from '../../features/add-todo/api/todoApi'
 
 
 export const store = () => {
     return configureStore({
-        reducer: rootReducer
+        reducer: {
+            [todoApi.reducerPath]: todoApi.reducer
+        },
+        middleware: (getDefaultMiddleware) =>
+            getDefaultMiddleware().concat(todoApi.middleware),
     })
 }
 
-export type RootState = ReturnType<typeof rootReducer>
-export type AppStore = ReturnType<typeof store>
-export type AppDispatch = AppStore['dispatch'];

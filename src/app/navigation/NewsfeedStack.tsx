@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import CommentsScreen from "@screens/CommentsScreen";
-import PostsScreen from "@screens/PostsScreen";
+import CommentsScreen from "../../screens/CommentsScreen";
+import PostsScreen from "../../screens/PostsScreen";
 
 const NewsfeedStack = () => {
     const Stack = createStackNavigator();

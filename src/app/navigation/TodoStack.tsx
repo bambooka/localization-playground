@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import HomeScreen from "@screens/HomeScreen";
-import TodoScreen from "@screens/TodoScreen";
+import HomeScreen from "../../screens/HomeScreen";
+import TodoScreen from "../../screens/TodoScreen";
 
 const TodoStack = () => {
     const Stack = createStackNavigator();
