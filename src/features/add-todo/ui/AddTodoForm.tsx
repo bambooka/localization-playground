@@ -1,8 +1,8 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import Button from '@shared/components/Button'
-import { useAddTodo } from '../model/index';
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { useRef, useState, useLayoutEffect } from "react";
+import { useAddTodoMutation } from "../../../features/add-todo/api/todoApi";
 
 const AddTodoForm = () => {
     const route = useRoute();
@@ -10,7 +10,8 @@ const AddTodoForm = () => {
     const inputTitleRef = useRef<TextInput>();
     const data = route.params;
     const isEdit = data?.isEdit;
-    const { addTodo } = useAddTodo()
+
+    const [addTodo] = useAddTodoMutation();
 
     const [inputValue, setInputValue] = useState('')
 
@@ -22,7 +23,8 @@ const AddTodoForm = () => {
     }
 
     const handleSubmit = async () => {
-        addTodo({ id: 1, title: inputValue })
+        await addTodo({ id: 1, title: inputValue }).unwrap()
+        console.log('call in component')
         goBack()
     }
 

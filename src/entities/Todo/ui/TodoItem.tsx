@@ -1,19 +1,19 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { FC } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { useAppDispatch } from '@shared/hooks/redux';
-import { deleteTodo } from '@entities/Todo/model/TodosActionCreators.ts';
 import Button from '@shared/components/Button';
 import EditIcon from '../../../shared/assets/svg/edit.svg';
 import DeleteIcon from '../../../shared/assets/svg/delete.svg';
+import { useDeleteTodoMutation } from '../../../features/add-todo/api/todoApi';
 
-const TodoItem: FC = ({data}) => {
+const TodoItem: FC = ({ data }) => {
 
-    const dispatch = useAppDispatch();
     const {navigate} = useNavigation();
 
-    const handleDeleteTodo = () => {
-        dispatch(deleteTodo(data.id))
+    const [deleteTodo, {isLoading }] = useDeleteTodoMutation()
+
+    const handleDeleteTodo = async () => {
+        await deleteTodo(data.id).unwrap();
     };
 
     const handleEditTodo = () => {
@@ -22,12 +22,15 @@ const TodoItem: FC = ({data}) => {
 
     return(
         <View style={styles.todoItem}>
-            <Text
+            {
+                isLoading ? <Text>.. wait</Text> : <Text
                 numberOfLines={1}
                 ellipsizeMode='tail'
                 style={styles.todoItemText}>
                     {data.title}
             </Text>
+            }
+            
             <Button
                 handlePress={handleDeleteTodo}
                 styles={{button: {...styles.button, ...styles.deleteButton}}}>

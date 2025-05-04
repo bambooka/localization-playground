@@ -8,15 +8,9 @@ import PlusIcon from '@shared/assets/svg/plus.svg'
 import { useGetTodosQuery } from '../../../features/add-todo/api/todoApi';
 
 const TodoList = () => {
-    const dispatch = useAppDispatch();
     const navigation = useNavigation();
-
     const {isLoading, data, error} = useGetTodosQuery()
 
-
-    useEffect(() => {
-        dispatch(getAllTodos())
-    }, []);
 
     const handleCreateTodo = () => {
         navigation.navigate('TodoScreen')
