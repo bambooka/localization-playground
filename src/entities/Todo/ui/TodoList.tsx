@@ -10,17 +10,17 @@ const TodoList = () => {
 
 
     const handleCreateTodo = () => {
-        navigation.navigate('TodoScreen')
+        navigation.navigate('TodoScreen', {isEdit: false})
     }
 
     if (isLoading) {
         return <Text>loading..</Text>
     }
 
-    if (error) return <Text>{console.log(error)}</Text>
+    if (error) return <Text>{error}</Text>
 
     return (
-        <View>
+        <View style={{position: 'relative'}}>
             <ScrollView style={styles.todoList}>
                 {data.map((item) => (
                     <TodoItem key={`todo-item-${item.id}`} data={item} />

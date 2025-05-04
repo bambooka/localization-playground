@@ -17,7 +17,7 @@ const TodoItem: FC = ({ data }) => {
     };
 
     const handleEditTodo = () => {
-        navigate('TodoScreen', { data, isEdit: true })
+        navigate('TodoScreen', { isEdit: true, data })
     };
 
     return(

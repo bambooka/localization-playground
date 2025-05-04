@@ -4,8 +4,7 @@ import { View, Text, StyleSheet } from "react-native"
 const CommentItem = ({data}) => {
     return (
         <View style={styles.commentContainer}>
-            <Text style={styles.commentName}>{data.name}</Text>
-            <Text style={styles.commentBody}>{data.body}</Text>
+            <Text style={styles.commentName}>{data.text}</Text>
         </View>
     )
 }

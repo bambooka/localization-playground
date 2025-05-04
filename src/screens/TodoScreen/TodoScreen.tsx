@@ -1,12 +1,11 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import AddTodoForm from '@features/add-todo/ui/AddTodoForm';
+import TodoForm from '@features/todo-form/ui/TodoForm';
 
 const TodoScreen = () => {
-
     return (
         <View style={styles.todoForm}>
-            <AddTodoForm />
+            <TodoForm />
         </View>
     )
 }
