@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Button from '@shared/components/Button';
 import EditIcon from '../../../shared/assets/svg/edit.svg';
 import DeleteIcon from '../../../shared/assets/svg/delete.svg';
-import { useDeleteTodoMutation } from '../../../features/add-todo/api/todoApi';
+import { useDeleteTodoMutation } from '../../../entities/Todo/model/todoApi';
 
 const TodoItem: FC = ({ data }) => {
 

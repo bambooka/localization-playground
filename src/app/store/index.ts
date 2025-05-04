@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { todoApi } from '../../features/add-todo/api/todoApi'
+import { todoApi } from '../../entities/Todo/model/todoApi';
 import { commentApi } from '../../entities/Comment/model/commentApi';
 import { postApi } from "../../entities/Post/model/postApi"
 

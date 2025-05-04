@@ -2,7 +2,7 @@ import { View, Text, ScrollView, StyleSheet, Pressable } from 'react-native';
 import TodoItem from '@entities/Todo/ui/TodoItem';
 import { useNavigation } from '@react-navigation/native';
 import PlusIcon from '@shared/assets/svg/plus.svg'
-import { useGetTodosQuery } from '../../../features/add-todo/api/todoApi';
+import { useGetTodosQuery } from '../../../entities/Todo/model/todoApi';
 
 const TodoList = () => {
     const navigation = useNavigation();

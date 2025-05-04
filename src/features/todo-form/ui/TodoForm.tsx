@@ -2,7 +2,8 @@ import { View, Text, TextInput, StyleSheet } from "react-native";
 import Button from '@shared/components/Button'
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { useRef, useState, useLayoutEffect } from "react";
-import { useAddTodoMutation } from "../../../features/add-todo/api/todoApi";
+import { useAddTodoMutation } from "../../../entities/Todo/model/todoApi";
+import { useUpdateTodoMutation } from "../../../entities/Todo/model/todoApi";
 
 const TodoForm = () => {
     const { goBack } = useNavigation()
@@ -11,6 +12,7 @@ const TodoForm = () => {
     const { isEdit, data } = route.params;
    
     const [addTodo] = useAddTodoMutation();
+    const [updateTodo] = useUpdateTodoMutation()
 
     const [inputValue, setInputValue] = useState('')
 
@@ -22,8 +24,12 @@ const TodoForm = () => {
     }
 
     const handleSubmit = async () => {
-        await addTodo({ title: inputValue }).unwrap()
-        console.log('call in component')
+        if (isEdit) {
+            console.log(data)
+            await updateTodo({ todoId: data.id, body: {title: inputValue} }).unwrap()
+        } else {
+            await addTodo({ title: inputValue }).unwrap()
+        }
         goBack()
     }
 
