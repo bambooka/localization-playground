@@ -23,7 +23,7 @@ const AddTodoForm = () => {
     }
 
     const handleSubmit = async () => {
-        await addTodo({ id: 1, title: inputValue }).unwrap()
+        await addTodo({ title: inputValue }).unwrap()
         console.log('call in component')
         goBack()
     }

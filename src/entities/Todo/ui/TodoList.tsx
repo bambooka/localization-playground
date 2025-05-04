@@ -1,7 +1,4 @@
-import { useEffect } from 'react';
 import { View, Text, ScrollView, StyleSheet, Pressable } from 'react-native';
-import { useAppDispatch } from '../../../shared/hooks/redux';
-import { getAllTodos } from '@entities/Todo/model/TodosActionCreators';
 import TodoItem from '@entities/Todo/ui/TodoItem';
 import { useNavigation } from '@react-navigation/native';
 import PlusIcon from '@shared/assets/svg/plus.svg'
@@ -20,13 +17,13 @@ const TodoList = () => {
         return <Text>loading..</Text>
     }
 
-    if (error) return <Text>smth went wrong</Text>
+    if (error) return <Text>{console.log(error)}</Text>
 
     return (
         <View>
             <ScrollView style={styles.todoList}>
                 {data.map((item) => (
-                    <TodoItem key={item.id} data={item} />
+                    <TodoItem key={`todo-item-${item.id}`} data={item} />
                 ))}
             </ScrollView>
             <Pressable
