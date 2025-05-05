@@ -1,37 +1,32 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import Button from '@shared/components/Button'
-import { useRoute, useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useRef, useState, useLayoutEffect } from "react";
-import { useAddTodoMutation } from "../../../entities/Todo/model/todoApi";
-import { useUpdateTodoMutation } from "../../../entities/Todo/model/todoApi";
 
-const TodoForm = () => {
+const TodoForm = ({ onSubmit }) => {
+    const route = useRoute();
+    const data = route.params.data;
     const { goBack } = useNavigation()
     const inputTitleRef = useRef<TextInput>();
-    const route = useRoute();
-    const { isEdit, data } = route.params;
-   
-    const [addTodo] = useAddTodoMutation();
-    const [updateTodo] = useUpdateTodoMutation()
+    const isEdit = Boolean(data)
 
     const [inputValue, setInputValue] = useState('')
 
     const initForm = () => {
-        if (isEdit) {
-            setInputValue(data.title);
-            inputTitleRef.current?.focus();
-        }
+        isEdit && setInputValue(data?.title);
+        inputTitleRef.current?.focus();
+    
     }
-
-    const handleSubmit = async () => {
-        if (isEdit) {
-            console.log(data)
-            await updateTodo({ todoId: data.id, body: {title: inputValue} }).unwrap()
-        } else {
-            await addTodo({ title: inputValue }).unwrap()
+    const handlePress = async () => {
+        const queryData = isEdit ? { todoId: data.id, updateValue: inputValue} : inputValue
+        
+        try {
+            await onSubmit(queryData);
+        } catch (e) {
+            console.log('submit error', e)
         }
-        goBack()
-    }
+    };
+    
 
     useLayoutEffect(() => {
         initForm()
@@ -43,7 +38,6 @@ const TodoForm = () => {
 
     return (
         <View>
-
             <TextInput
                 style={styles.textInput}
                 ref={inputTitleRef}
@@ -58,8 +52,8 @@ const TodoForm = () => {
                     <Text style={styles.buttonText}>cancel</Text>
                 </Button>
                 <Button
-                    disabled={inputValue.length === 0}
-                    handlePress={handleSubmit}
+                    disabled={inputValue?.length === 0}
+                    handlePress={handlePress}
                     styles={{ button: { ...styles.button, ...styles.saveButton } }}>
                     <Text style={styles.buttonText}>save</Text>
                 </Button>

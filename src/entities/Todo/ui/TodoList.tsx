@@ -3,10 +3,14 @@ import TodoItem from '@entities/Todo/ui/TodoItem';
 import { useNavigation } from '@react-navigation/native';
 import PlusIcon from '@shared/assets/svg/plus.svg'
 import { useGetTodosQuery } from '../../../entities/Todo/model/todoApi';
+import Loader from '../../../shared/components/Loader';
 
 const TodoList = () => {
     const navigation = useNavigation();
-    const {isLoading, data, error} = useGetTodosQuery()
+    const {isLoading, data, error} = useGetTodosQuery();
+
+    if (error) return (<Text>{error.error}</Text>);
+    if (!data?.length) return (<View><Text>no todos</Text></View>)
 
 
     const handleCreateTodo = () => {
@@ -14,7 +18,7 @@ const TodoList = () => {
     }
 
     if (isLoading) {
-        return <Text>loading..</Text>
+        return <Loader />
     }
 
     if (error) return <Text>{error}</Text>

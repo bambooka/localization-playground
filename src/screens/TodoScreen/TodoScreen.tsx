@@ -1,11 +1,16 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import TodoForm from '@features/todo-form/ui/TodoForm';
+import AddTodoForm from '../../features/add-todo/ui/AddTodoForm';
+import { useRoute } from '@react-navigation/native';
+import UpdateTodoForm from '../../features/update-todo/ui/UpdateTodoForm';
 
 const TodoScreen = () => {
+
+    const route = useRoute();
+    const isEdit = route.params.isEdit;
     return (
         <View style={styles.todoForm}>
-            <TodoForm />
+            {isEdit ? <UpdateTodoForm data={route.params.data} /> : <AddTodoForm />}
         </View>
     )
 }

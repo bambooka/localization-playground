@@ -1,8 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+type Todo = {
+    id: string;
+    title: string;
+}
+
 export const todoApi = createApi({
     reducerPath: 'todoApi',
-    baseQuery: fetchBaseQuery({baseUrl: 'http://10.0.2.2:3001'}),
+    baseQuery: fetchBaseQuery({baseUrl: 'http://10.0.2.2:3000'}),
     tagTypes: ['Todo'],
     endpoints: (builder) => ({
         getTodos: builder.query({
@@ -23,18 +28,16 @@ export const todoApi = createApi({
             invalidatesTags: ['Todo']
         }),
         updateTodo: builder.mutation({
-            query: ({todoId, body}) => ({
-                url: `/todos/${todoId}`,
-                method: 'PATCH',
-                body: body
-            }),
-            transformResponse: (res) => {
-                return res
-            },
-            invalidatesTags: (result, error, { todoId }) => {
-                console.log('result', result)
-                return [{ type: 'Todo', id: todoId }]
-            }
+            query: ({todoId, ...title}) => {
+                return {
+                    url: `/todos/${todoId}`,
+                    method: 'PATCH',
+                    body: title
+                }},
+                invalidatesTags: (result, error, { todoId }) => {
+                    return [
+                    { type: "Todo", id: todoId },
+                  ]},
         }),
         deleteTodo: builder.mutation({
             query: (id) => ({
